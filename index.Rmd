@@ -1,0 +1,58 @@
+---
+title: "A Tutorial, Hooray!"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+
+cars <- mtcars %>% 
+  mutate(gear = as.factor(gear))
+
+theme_set(theme_minimal())
+```
+
+# Carz {data-icon="fa-car"}
+
+Sidebar {.sidebar}
+--------
+Wowee, zowee! This is a sidebar.
+
+Column {data-width=1000}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r plot_a}
+p <- ggplot(cars, aes(gear, mpg)) +
+  geom_bar(stat = "summary")
+
+ggplotly(p)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+ggplot(cars, aes(hp, mpg)) +
+  geom_point(alpha = .6) +
+  geom_smooth()
+```
+
+### Chart C
+
+```{r}
+ggplot(cars, aes(mpg, hp)) +
+  geom_point(alpha = .6) +
+  geom_smooth()
+```
+
+# Bing Bong {data-icon="fas fa-bong"}
